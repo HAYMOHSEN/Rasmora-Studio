@@ -1,0 +1,12 @@
+{
+  "name": "ArtProof Studio",
+  "short_name": "ArtProof",
+  "description": "Create, review, protect, and deliver artwork professionally.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#15161b",
+  "theme_color": "#15161b",
+  "icons": [
+    {"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
