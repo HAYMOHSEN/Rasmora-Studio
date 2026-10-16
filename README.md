@@ -1,29 +1,31 @@
-# ArtProof Studio
+# ArtProof Studio v2
 
-An offline-capable Progressive Web App prototype for creating, reviewing, protecting, and delivering visual artwork.
+An offline-capable Progressive Web App for painting, illustration, retouching, vector artwork, and delivery preparation.
 
 ## Included working capabilities
 
-- Raster brush, eraser, lines, rectangles, ellipses, full-layer fill, gradients, colour picker, and bilingual text.
-- Editable local layers with visibility, import, undo/redo, checkpoints, and PNG/project export.
-- Reference workspace with local-image import, palette actions, and composition guides.
-- Project Health checks and print-proof modes.
-- Delivery presets for social, print, poster, and portfolio output.
-- Art Time Machine checkpoints, a local activity trail, licence ledger, project fingerprint, and a creation report export.
+- **Brush Studio:** pencil, ink, marker, charcoal, airbrush, oil, watercolour, and texture brushes. Pointer Events use pen pressure, tilt, and twist/rotation when the device exposes them. Brush stabilisation, symmetry, palm-rejection behaviour, custom presets, keyboard shortcuts, and workspace modes are included.
+- **Layers:** paint layers, groups, group rendering, masks, clipping masks, blend modes, opacity, pixel/alpha/position locks, and live adjustment layers (brightness, contrast, saturation, hue, blur, and monochrome).
+- **Selections:** lasso, rectangle, ellipse, magic wand, colour range, feather, refine edge, invert, quick-mask preview, and constrained painting/fill/effects.
+- **Transforms and retouching:** scale, rotate, perspective handles, warp, mesh-warp approximation, liquify, smudge, blur, sharpen, dodge/burn, clone stamp, and healing.
+- **Colour Studio:** RGB, HSL, HEX, CMYK values, palette extraction, harmony palettes, gradients, colour history, and colour-vision proof previews.
+- **Reference tools:** side-by-side reference board, perspective grid, rulers, pose mannequin, lighting arrow, symmetry guide, and custom guide lines.
+- **Vector and text:** editable Bézier anchor paths, basic SVG path import/export, vector icons, and editable Arabic/English text with RTL support.
+- **Export:** PNG, JPG, uncompressed RGB TIFF, flattened compatibility PSD, SVG with live ArtProof paths/text, Device-CMYK PDF proof, transparent background, and high-resolution social, poster, print, and portfolio presets. The .artproof.json file retains layers, masks, adjustments, vectors, and project data.
 
-## Honest implementation boundary
+## Important delivery notes
 
-The Creation Passport is a transparent local report. It does not claim legal copyright ownership or C2PA signing. A production release would connect a trusted C2PA signing provider and a secure collaboration backend for client review links.
+- The PSD export is a valid flattened RGB compatibility file. Keep the .artproof.json project alongside it for editable ArtProof layers.
+- The PDF creates Device-CMYK raster data at a nominal 300 DPI page size. For a colour-critical commercial print run, ask the printer for the final ICC-profiled conversion and proof.
+- C2PA signing and shareable review URLs still require a separate production signing/collaboration service; they are not represented as completed features in this offline build.
 
 ## Run locally
 
-Serve this folder from any static web server, then open `index.html`. For example:
+Serve this folder from any static web server, then open index.html.
 
-```bash
-python3 -m http.server 8080
-```
+    python3 -m http.server 8080
 
-Open `http://localhost:8080` and install it from the browser when prompted.
+Open http://localhost:8080 and install it from the browser when prompted.
 
 ## Microsoft Store / PWA Builder
 

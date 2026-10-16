@@ -1,7 +1,7 @@
 {
   "name": "ArtProof Studio",
   "short_name": "ArtProof",
-  "description": "Create, review, protect, and deliver artwork professionally.",
+  "description": "An offline professional painting, illustration, vector, and delivery workspace.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#15161b",
