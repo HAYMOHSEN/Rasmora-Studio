@@ -20,7 +20,7 @@ function pngInfo(uri,maxBytes=MAX_BODY){
 }
 function buildRequest(input,model){
   if(!input||!['fill','remove','upscale'].includes(input.action))throw new BridgeError(400,'Choose fill, remove or upscale');
-  const dimensions=pngInfo(input.image);if(dimensions.width!==1200||dimensions.height!==900)throw new BridgeError(400,'This bridge expects a 1200 × 900 ArtProof layer');
+  const dimensions=pngInfo(input.image);if(dimensions.width!==1200||dimensions.height!==900)throw new BridgeError(400,'This bridge expects a 1200 × 900 Rasmora layer');
   const prompt=typeof input.prompt==='string'?input.prompt.trim():'';if(prompt.length>4000)throw new BridgeError(400,'Prompt limit is 4000 characters');
   const body={model,images:[{image_url:input.image}],n:1,output_format:'png',quality:'medium',size:input.action==='upscale'?'2048x1536':'1536x1152'};
   if(input.action==='fill'){
@@ -36,7 +36,7 @@ async function readResponse(response){const reader=response.body.getReader(),chu
 function createBridge(config={}){
   const token=config.token||randomBytes(24).toString('base64url'),apiKey=config.apiKey||'',model=config.model||'gpt-image-2.5-sunburst',origin=config.origin||'http://127.0.0.1:8787',fetcher=config.fetcher||fetch;
   if(token.length<24||token.length>256||/^sk-/.test(token))throw new Error('Use a separate bridge token of 24–256 characters, never a provider API key');
-  const originURL=new URL(origin);if(originURL.origin!==origin||!['http:','https:'].includes(originURL.protocol))throw new Error('ARTPROOF_ALLOWED_ORIGIN must be one exact HTTP(S) origin, without a trailing slash');
+  const originURL=new URL(origin);if(originURL.origin!==origin||!['http:','https:'].includes(originURL.protocol))throw new Error('RASMORA_ALLOWED_ORIGIN must be one exact HTTP(S) origin, without a trailing slash');
   let active=false,lastRequest=0;const approvedHost=originURL.host;
   const staticFiles={'/':'index.html','/index.html':'index.html','/creative-studio.js':'creative-studio.js','/creative-studio.css':'creative-studio.css','/extended-studio.css':'extended-studio.css','/extended-studio.js':'extended-studio.js','/studio3d.bundle.js':'studio3d.bundle.js','/assets/xatlas-web.wasm':'assets/xatlas-web.wasm','/sw.js':'sw.js','/manifest.webmanifest':'manifest.webmanifest','/assets/icon.svg':'assets/icon.svg','/assets/icon-192.png':'assets/icon-192.png','/assets/icon-512.png':'assets/icon-512.png','/assets/icon-maskable-512.png':'assets/icon-maskable-512.png','/assets/aurelia-editorial-sample.png':'assets/aurelia-editorial-sample.png'};
   const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.png':'image/png','.wasm':'application/wasm'};
@@ -48,7 +48,7 @@ function createBridge(config={}){
       if(url.pathname!=='/api/image-edit'){
         if(req.method!=='GET'&&req.method!=='HEAD')throw new BridgeError(405,'Method not allowed');const name=staticFiles[url.pathname];if(!name)throw new BridgeError(404,'Not found');const bytes=await fs.readFile(path.join(__dirname,name));res.writeHead(200,{'Content-Type':mime[path.extname(name)],'Content-Length':bytes.length,'Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"frame-ancestors 'none'; object-src 'none'; base-uri 'none'"});res.end(req.method==='HEAD'?undefined:bytes);return;
       }
-      if(req.headers.origin!==origin)throw new BridgeError(403,'Origin not allowed; open the configured ArtProof origin');
+      if(req.headers.origin!==origin)throw new BridgeError(403,'Origin not allowed; open the configured Rasmora origin');
       res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');
       if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Methods':'POST','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Max-Age':'600'});res.end();return}
       if(req.method!=='POST')throw new BridgeError(405,'POST is required');
@@ -69,8 +69,8 @@ function createBridge(config={}){
   server.requestTimeout=180000;server.headersTimeout=15000;return {server,token,origin};
 }
 if(require.main===module){
-  const port=Number(process.env.ARTPROOF_PORT||8787);if(!Number.isInteger(port)||port<1024||port>65535)throw new Error('Use a port between 1024 and 65535');
-  const bridge=createBridge({apiKey:process.env.OPENAI_API_KEY,token:process.env.ARTPROOF_BRIDGE_TOKEN,model:process.env.ARTPROOF_IMAGE_MODEL,origin:process.env.ARTPROOF_ALLOWED_ORIGIN||`http://127.0.0.1:${port}`});
-  bridge.server.listen(port,'127.0.0.1',()=>{console.log(`ArtProof Studio: http://127.0.0.1:${port}\nAllowed browser origin: ${bridge.origin}\nBridge session token (paste in Assist; do not share): ${bridge.token}\nProvider key stays on this server. Requests can incur charges.`);if(!process.env.OPENAI_API_KEY)console.log('Offline tools are ready; AI is disabled until OPENAI_API_KEY is configured.')});
+  const port=Number((process.env.RASMORA_PORT||process.env.ARTPROOF_PORT)||8787);if(!Number.isInteger(port)||port<1024||port>65535)throw new Error('Use a port between 1024 and 65535');
+  const bridge=createBridge({apiKey:process.env.OPENAI_API_KEY,token:(process.env.RASMORA_BRIDGE_TOKEN||process.env.ARTPROOF_BRIDGE_TOKEN),model:(process.env.RASMORA_IMAGE_MODEL||process.env.ARTPROOF_IMAGE_MODEL),origin:(process.env.RASMORA_ALLOWED_ORIGIN||process.env.ARTPROOF_ALLOWED_ORIGIN)||`http://127.0.0.1:${port}`});
+  bridge.server.listen(port,'127.0.0.1',()=>{console.log(`Rasmora Studio: http://127.0.0.1:${port}\nAllowed browser origin: ${bridge.origin}\nBridge session token (paste in Assist; do not share): ${bridge.token}\nProvider key stays on this server. Requests can incur charges.`);if(!process.env.OPENAI_API_KEY)console.log('Offline tools are ready; AI is disabled until OPENAI_API_KEY is configured.')});
 }
 module.exports={createBridge,buildRequest,pngInfo};

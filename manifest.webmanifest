@@ -1,6 +1,6 @@
 {
-  "name": "ArtProof Studio",
-  "short_name": "ArtProof",
+  "name": "Rasmora Studio",
+  "short_name": "Rasmora",
   "description": "Painting, illustration, vector, animation and 3D creative workspace.",
   "start_url": "./index.html",
   "display": "standalone",
@@ -31,5 +31,6 @@
       "type": "image/svg+xml",
       "purpose": "any"
     }
-  ]
+  ],
+  "lang": "en"
 }

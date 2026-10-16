@@ -1,6 +1,6 @@
 {
-  "name": "artproof-studio",
-  "version": "5.0.0",
+  "name": "rasmora-studio",
+  "version": "5.0.1",
   "private": true,
   "description": "Offline-capable painting, illustration, animation and 3D PWA with optional AI and private Team services",
   "scripts": {

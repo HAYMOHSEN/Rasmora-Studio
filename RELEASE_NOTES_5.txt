@@ -1,4 +1,18 @@
-ARTPROOF STUDIO 5.0 — DESKTOP WORKSPACE UPDATE
+RASMORA STUDIO 5.0.1 — BRANDING UPDATE
+Reserved product name: Rasmora Studio
+Arabic brand rendering: رسمورا ستوديو
+
+Updated application name, installed-app metadata, app icon, wordmarks, export
+names, launchers, optional server labels, offline cache and Store materials.
+New saves use .rasmora.json, .rasmora3d.json and Rasmora brush-pack names.
+Existing ArtProof 2D/3D projects and brush packs still open. Legacy service
+environment variables remain accepted; the documented RASMORA_ names take
+precedence. File-format schema versions remain unchanged for compatibility.
+
+The product name has been reported as reserved by the publisher. No Store
+submission, public deployment or Windows package signing is performed here.
+
+DESKTOP WORKSPACE FEATURES
 
 ADDED
 • Free 2D canvas-view rotation, fit-to-view and Ctrl+wheel zoom. Rotation affects the view, not exported artwork.
@@ -8,7 +22,7 @@ ADDED
 • Studio lighting, environment lighting, progressive GPU path tracing, PNG renders and a manual render handoff.
 • A simple automatically weighted four-bone rig, pose keys and GLB animation export.
 • Embedded GLB, OBJ and FBX import; GLB export; OBJ export with preserved quad faces for generated vase and torus meshes.
-• Separate editable .artproof3d.json scene files, including texture layers. 2D .artproof.json projects remain supported.
+• Separate editable .rasmora3d.json scene files, including texture layers. 2D .rasmora.json projects remain supported.
 • An optional private Team server with durable revision storage, comments, resolution of feedback, outbound auto-save every five seconds and optional incoming sync checks every two seconds. Revision conflicts block overwriting other changes.
 
 FIXED
@@ -18,7 +32,7 @@ FIXED
 • Downloads generated during animation/time-lapse export remain clickable while canvas editing is temporarily locked.
 
 ALREADY INCLUDED
-Custom brush dynamics/flow/opacity; ArtProof JSON brush packs; pressure/tilt/rotation when exposed by the pen and browser; masks, clipping masks, alpha lock and blend modes; non-destructive adjustments; editable Bézier paths; Arabic–English text; selections, transforms, painting, guides, symmetry, frame animation and speedpaint capture.
+Custom brush dynamics/flow/opacity; Rasmora JSON brush packs; pressure/tilt/rotation when exposed by the pen and browser; masks, clipping masks, alpha lock and blend modes; non-destructive adjustments; editable Bézier paths; Arabic–English text; selections, transforms, painting, guides, symmetry, frame animation and speedpaint capture.
 
 SCOPE AND LIMITS
 This remains an installable PWA, not a signed Windows installer. Windows packaging, actual pen/tablet tests and Store certification are separate steps.

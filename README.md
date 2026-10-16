@@ -1,10 +1,14 @@
-# ArtProof Studio
+# Rasmora Studio
+
+**Reserved Microsoft Store product name: Rasmora Studio.** Arabic brand: **رسمورا ستوديو**. Tagline: **Draw. Paint. Create in 3D.**
+
+Version 5.0.1 updates the name, icons, launchers and export filenames. Existing ArtProof projects and brush packs remain compatible. See RELEASE_NOTES_5.txt for details.
 
 An offline-capable Progressive Web App for painting, illustration, retouching, editable vector artwork, frame animation, and delivery preparation. This is an installable browser app, not a signed native Windows executable.
 
-## Version 5.0 additions
+## Version 5.0.1
 
-Open **3D Studio** in the top bar for mesh sculpting, UV unwrapping, layered texture painting, PBR materials, studio lighting, progressive path tracing, a basic bone rig and GLB/OBJ exchange. Save these scenes separately as **.artproof3d.json**. The 3D scene limit is 200,000 triangles; WebGL 2 and compatible graphics hardware are required.
+Open **3D Studio** in the top bar for mesh sculpting, UV unwrapping, layered texture painting, PBR materials, studio lighting, progressive path tracing, a basic bone rig and GLB/OBJ exchange. Save these scenes separately as **.rasmora3d.json**. The 3D scene limit is 200,000 triangles; WebGL 2 and compatible graphics hardware are required.
 
 The canvas toolbar now supports free view rotation, Fit and Ctrl+wheel zoom. **Team** connects to the optional private revision-sync and feedback service. Run **Start_Team_Server.cmd** separately and follow **TEAM_SETUP.txt**. No public service has been deployed. See **RELEASE_NOTES_5.txt** for the complete feature scope, hardware dependencies and limits.
 
@@ -13,7 +17,7 @@ The 3D runtime and UV engine are bundled for offline use. End users do not need 
 ## Start this version
 
 1. Extract the ZIP to a folder.
-2. With Node.js 22 or newer installed, run `node ai-bridge.cjs` in that folder, or double-click `Start_ArtProof.cmd` on Windows.
+2. With Node.js 22 or newer installed, run `node ai-bridge.cjs` in that folder, or double-click `Start_Rasmora.cmd` on Windows.
 3. Open **http://127.0.0.1:8787** in Edge or Chrome. The offline creative tools need no API key or npm install. You may install the PWA from the browser.
 4. New work is captured automatically for speedpaint. Use **Motion → Pause capture** to pause it. Save with **Export → Save editable project**; reopen using **Open project** in the top bar.
 
@@ -72,7 +76,7 @@ The app opens with **Aurelia · Editorial sample**, an original high-end studio 
 
 ## Included working capabilities
 
-- **Brush Studio:** 16 built-in pencil, pen, airbrush, oil, watercolour, charcoal, texture, and stamp tips. Pointer Events use pen pressure, tilt, twist/rotation, and velocity when the device exposes them. Artists can adjust flow, opacity, spacing, stabilisation, shape and angle dynamics, symmetry, and palm rejection; custom brushes can be saved, exported, and imported as ArtProof Brush Pack JSON files.
+- **Brush Studio:** 16 built-in pencil, pen, airbrush, oil, watercolour, charcoal, texture, and stamp tips. Pointer Events use pen pressure, tilt, twist/rotation, and velocity when the device exposes them. Artists can adjust flow, opacity, spacing, stabilisation, shape and angle dynamics, symmetry, and palm rejection; custom brushes can be saved, exported, and imported as Rasmora Brush Pack JSON files.
 - **Layers:** paint layers, groups, group rendering, masks, clipping masks, live vector masks, blend modes, opacity, pixel/alpha/position locks, and live adjustment layers (Curves, Colour Balance, brightness, contrast, saturation, hue, blur, and monochrome).
 - **Selections:** freehand lasso, rectangular and elliptical marquees, connected-region magic wand, colour range, and an edge-aware Quick Selection brush. Replace, add, subtract, or intersect masks; sample the active layer or visible composite; feather/refine/invert; preview the actual selection boundary; and copy selected pixels to a new layer.
 - **Transforms:** selection-aware free transform with anchored resize handles, proportion lock, move, rotation handle, X/Y skew, corner distortion, bend, and a nine-control-point warp grid. The preview preserves the original until Apply, stays in the correct layer stack, and leaves unselected pixels in place. Apply transforms the selection mask too. Reset, Cancel, Undo, and Redo are available.
@@ -80,11 +84,11 @@ The app opens with **Aurelia · Editorial sample**, an original high-end studio 
 - **Colour Studio:** an interactive digital hue/saturation wheel, RGB, HSV, HSL, HEX, and CMYK values, palette extraction, harmony palettes, gradients, colour history, and colour-vision proof previews. The wet-paint mixer combines two pigments into a reusable colour, and the Wet Mix canvas tool deposits and picks up colour as it is dragged.
 - **Reference tools:** side-by-side reference board, perspective grid, rulers, pose mannequin, lighting arrow, symmetry guide, and custom guide lines.
 - **Vector and text:** editable cubic Bézier anchors and handles, basic SVG shape/path/text import/export, vector icons, geometric shapes, and editable multiline Arabic/English text with RTL support.
-- **Export:** PNG, JPG, uncompressed RGB TIFF, flattened compatibility PSD, SVG with live ArtProof paths/text, Device-CMYK PDF proof, transparent background, and high-resolution social, poster, print, and portfolio presets. The .artproof.json file retains layers, masks, adjustments, vectors, and project data.
+- **Export:** PNG, JPG, uncompressed RGB TIFF, flattened compatibility PSD, SVG with live Rasmora paths/text, Device-CMYK PDF proof, transparent background, and high-resolution social, poster, print, and portfolio presets. The .rasmora.json file retains layers, masks, adjustments, vectors, and project data.
 
 ## Important delivery notes
 
-- The PSD export is a valid flattened RGB compatibility file. Keep the .artproof.json project alongside it for editable ArtProof layers.
+- The PSD export is a valid flattened RGB compatibility file. Keep the .rasmora.json project alongside it for editable Rasmora layers.
 - The PDF creates Device-CMYK raster data at a nominal 300 DPI page size. For a colour-critical commercial print run, ask the printer for the final ICC-profiled conversion and proof.
 - C2PA signing and shareable review URLs still require a separate production signing/collaboration service; they are not represented as completed features in this offline build.
 - Quick Selection is a connected-colour brush, not AI object/subject detection. Its tolerance controls edge sensitivity within the brush footprint.
@@ -112,7 +116,7 @@ The app has no CDN or browser runtime dependencies. The optional bridge uses Nod
     npm install
     npm test
 
-Validation for this delivery: **55 automated checks passed**, covering the existing creative tools, AI bridge guards and Team revision/conflict handling. Actual-browser checks covered 3D sculpt undo/redo, UV generation, texture painting, editable scene round-trips, weighted rig animation, GLB export, progressive path tracing, WebM download and two-client Team sync/feedback. Windows device and production-service validation remain separate. The Store kit includes the detailed logs.
+Validation for this delivery: **57 automated checks passed**, including legacy-project migration, existing creative tools, AI bridge guards and Team revision/conflict handling. Fresh browser checks cover the Rasmora interface, real screenshots, WebM download, new 2D/3D saves, legacy projects/brush packs, Team publishing/feedback and offline 2D/3D startup. The preceding version’s detailed 3D, rig, path-tracing and two-client sync records are retained in the Store kit under validation/previous-feature-validation/. Windows device and production-service validation remain separate.
 
 ## Run locally
 
