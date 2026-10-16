@@ -2,11 +2,11 @@
 
 **Reserved Microsoft Store product name: Rasmora Studio.** Arabic brand: **رسمورا ستوديو**. Tagline: **Draw. Paint. Create in 3D.**
 
-Version 5.0.1 updates the name, icons, launchers and export filenames. Existing ArtProof projects and brush packs remain compatible. See RELEASE_NOTES_5.txt for details.
+Release candidate **5.0.3-rc.1** fixes export, project-import, Team sync and 3D save/import defects found in the 16 October 2026 pre-release audit. See **APPLY_FIX.txt** and **release-audit.html** before deployment. Existing ArtProof projects and brush packs remain compatible. The candidate is not approved for release: viewport PNG export after path tracing timed out in both combined and fresh software-rendered browser sessions. Investigate that path on supported Windows GPUs before shipping. No Windows certification is claimed.
 
 An offline-capable Progressive Web App for painting, illustration, retouching, editable vector artwork, frame animation, and delivery preparation. This is an installable browser app, not a signed native Windows executable.
 
-## Version 5.0.1
+## Included studios
 
 Open **3D Studio** in the top bar for mesh sculpting, UV unwrapping, layered texture painting, PBR materials, studio lighting, progressive path tracing, a basic bone rig and GLB/OBJ exchange. Save these scenes separately as **.rasmora3d.json**. The 3D scene limit is 200,000 triangles; WebGL 2 and compatible graphics hardware are required.
 
@@ -56,7 +56,7 @@ Hide an adjustment, reduce its layer opacity, or undo to recover the earlier app
 
 Expand the timeline or open **Motion**. Capture the current drawing, then add blank/duplicate frames. Blank frames retain paper and starter-photo layers; use **Create → Hide starter photograph** for a blank illustration workflow. Each frame keeps its layer/vector state and its own undo history; switching frames retains the latest six undo snapshots for that frame.
 
-Onion skins show the adjacent frames' artwork without paper/starter-photo layers. They are never baked into exports. PNG-sequence ZIPs include `timing.json` with FPS and exposure durations. WebM export uses MediaRecorder and takes approximately the clip's duration. Keep the tab visible; use **Cancel video export** or Escape if needed. Unsupported browsers can still export image sequences.
+Onion skins show the adjacent frames' artwork without paper/starter-photo layers. They are never baked into exports. PNG-sequence ZIPs include `timing.json` with FPS and exposure durations. WebM export uses MediaRecorder and takes approximately the clip's duration. Clips shorter than half a second hold their final frame until 500 ms so the browser can encode a non-empty video. Keep the tab visible; use **Cancel video export** or Escape if needed. Unsupported browsers can still export image sequences.
 
 Speedpaint capture starts automatically for new drawings, stores a snapshot after committed changes, and omits idle time. It is an edit-based time-lapse, not a screen recorder or a recording of every cursor movement. At 240 retained stages, older stages are thinned; the first and newest stages are kept so capture continues through the finish. Stages and pause/resume state are saved with the editable project. Export **Time-lapse WebM** for a speedpaint video, or **JPEG sequence** for another video editor.
 
@@ -118,7 +118,7 @@ The app has no CDN or browser runtime dependencies. The optional bridge uses Nod
     npm install
     npm test
 
-Validation for this delivery: **57 automated checks passed**, including legacy-project migration, existing creative tools, AI bridge guards and Team revision/conflict handling. Fresh browser checks cover the Rasmora interface, real screenshots, WebM download, new 2D/3D saves, legacy projects/brush packs, Team publishing/feedback and offline 2D/3D startup. The preceding version’s detailed 3D, rig, path-tracing and two-client sync records are retained in the Store kit under validation/previous-feature-validation/. Windows device and production-service validation remain separate.
+Validation for this candidate: **67 automated checks passed**, including seven new export, rollback and save-boundary regressions. The release-audit.html report and validation/ records describe the browser checks, source revision, remaining device tests and deployment status. Windows hardware, Store packaging and production-service validation remain separate.
 
 ## Run locally
 
