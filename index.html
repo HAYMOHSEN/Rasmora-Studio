@@ -411,32 +411,42 @@
   function loadBrushSettings(raw){Object.assign(state.brush,normaliseBrushSettings(raw))}
   function makeCustomBrush(name,settings){var clean=(name||'').trim().replace(/\s+/g,' ').slice(0,48);return clean?{name:clean,settings:normaliseBrushSettings(settings)}:null}
 
-  function init(){
+  function init(options){
+    var withSample=!options||options.sample!==false;
     if(studio)studio.resetDocument();
     var paper=newPaint('Paper & background','background');
-    var pc=canvasCtx(paper.canvas),g=pc.createLinearGradient(0,0,W,H);
-    g.addColorStop(0,'#f8f2e8');g.addColorStop(1,'#e8dfd0');pc.fillStyle=g;pc.fillRect(0,0,W,H);
-    pc.fillStyle='rgba(103,75,43,.035)';for(var i=0;i<1100;i++){pc.fillRect(Math.random()*W,Math.random()*H,1,1)}
+    var pc=canvasCtx(paper.canvas);
+    if(withSample){
+      var g=pc.createLinearGradient(0,0,W,H);
+      g.addColorStop(0,'#f8f2e8');g.addColorStop(1,'#e8dfd0');pc.fillStyle=g;pc.fillRect(0,0,W,H);
+      pc.fillStyle='rgba(103,75,43,.035)';for(var i=0;i<1100;i++){pc.fillRect(Math.random()*W,Math.random()*H,1,1)}
+    }else{
+      pc.fillStyle='#ffffff';pc.fillRect(0,0,W,H);state.color.bg='#ffffff';
+    }
     paper.lockedPixels=true;paper.lockedPosition=true;
     var paint=newPaint('Layer 1');
-    var sample=newPaint('Aurelia · Editorial sample','sample');
-    state.root=[paint,sample,paper];state.activeId=paint.id;if(studio)studio.startProcessCapture();
-    activity('Project created','Professional starter canvas');
+    var sample=withSample?newPaint('Aurelia · Editorial sample','sample'):null;
+    state.root=withSample?[paint,sample,paper]:[paint,paper];state.activeId=paint.id;if(studio)studio.startProcessCapture();
+    activity('Project created',withSample?'Professional starter canvas':'Blank white canvas');
     pushHistory('Initial project');
     render();
-    var sampleImage=new Image();
-    sampleImage.onload=function(){
-      var sc=canvasCtx(sample.canvas),glaze=sc.createLinearGradient(0,0,W,H);
-      sc.drawImage(sampleImage,0,0,W,H);
-      glaze.addColorStop(0,'rgba(18,29,35,.025)');
-      glaze.addColorStop(1,'rgba(18,29,35,.13)');
-      sc.fillStyle=glaze;sc.fillRect(0,0,W,H);
-      state.history=[];state.redo=[];
-      activity('Editorial starter sample loaded','Aurelia studio photo');
-      pushHistory();
-      render();
-    };
-    sampleImage.src='assets/aurelia-editorial-sample.png';
+    if(withSample){
+      var sampleImage=new Image();
+      sampleImage.onload=function(){
+        // Ignore the old demo image if New or Open has replaced its document.
+        if(state.root.indexOf(sample)===-1)return;
+        var sc=canvasCtx(sample.canvas),glaze=sc.createLinearGradient(0,0,W,H);
+        sc.drawImage(sampleImage,0,0,W,H);
+        glaze.addColorStop(0,'rgba(18,29,35,.025)');
+        glaze.addColorStop(1,'rgba(18,29,35,.13)');
+        sc.fillStyle=glaze;sc.fillRect(0,0,W,H);
+        state.history=[];state.redo=[];
+        activity('Editorial starter sample loaded','Aurelia studio photo');
+        pushHistory();
+        render();
+      };
+      sampleImage.src='assets/aurelia-editorial-sample.png';
+    }
     drawBrushPreview();
     if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
   }
@@ -979,7 +989,7 @@
   $$('.panel-tab').forEach(function(b){b.addEventListener('click',function(){setPanel(b.dataset.panel)})});
   overlay.addEventListener('pointerdown',handlePointerDown);overlay.addEventListener('pointermove',handlePointerMove);overlay.addEventListener('pointerup',handlePointerUp);overlay.addEventListener('pointercancel',cancelPointer);overlay.addEventListener('pointerleave',function(){if(state.inputPointerId==null){state.cursor=null;drawOverlay()}});
   $('#undoBtn').addEventListener('click',undo);$('#redoBtn').addEventListener('click',redo);
-  $('#newBtn').addEventListener('click',function(){if(confirm('Start a new artwork with the professional starter sample?')){state.transform=null;state.pointer=null;state.stroke=null;state.inputPointerId=null;clearSelection(true);state.root=[];state.vector.objects=[];state.history=[];state.redo=[];state.activity=[];syncTransformUI();init();tell('New artwork created with the editorial sample')}});
+  $('#newBtn').addEventListener('click',function(){if(confirm('Start a new artwork on a blank white canvas? Save your current project first; unsaved changes will be discarded.')){state.transform=null;state.pointer=null;state.stroke=null;state.inputPointerId=null;clearSelection(true);state.root=[];state.vector.objects=[];state.history=[];state.redo=[];state.activity=[];$('#projectName').value='Untitled Artwork';syncTransformUI();init({sample:false});tell('New artwork created on a blank white canvas')}});
   $('#importBtn').addEventListener('click',function(){$('#artImport').click()});$('#artImport').addEventListener('change',function(){var f=this.files[0];if(!f)return;var im=new Image();im.onload=function(){var l=activePaint();if(!l||l.lockedPixels){addPaintLayer();l=activePaint()}pushHistory('Image imported');var s=Math.min(W/im.width,H/im.height),w=im.width*s,h=im.height*s;canvasCtx(l.canvas).drawImage(im,(W-w)/2,(H-h)/2,w,h);activity('Artwork imported',f.name);render();tell('Image imported')};im.src=URL.createObjectURL(f)});
   $('#workspaceBtn').addEventListener('click',function(){var app=$('#app');state.workspace=state.workspace==='standard'?'compact':state.workspace==='compact'?'immersive':'standard';app.classList.toggle('compact',state.workspace==='compact');app.classList.toggle('immersive',state.workspace==='immersive');tell('Workspace: '+state.workspace)});
   $('#quickExportBtn').addEventListener('click',function(){state.exportFormat='png';exportArtwork()});

@@ -1,0 +1,39 @@
+RASMORA STUDIO — BLANK WHITE NEW CANVAS FIX
+
+WHY THIS HAPPENED
+New called the demo setup and added the editorial photo and textured paper.
+The fix gives new artwork pure-white paper and one empty paint layer.
+It also prevents a late demo-photo load from resetting the new drawing's undo
+history. The first-opening demo remains available.
+
+APPLY TO YOUR LIVE APP
+1. Extract this ZIP.
+2. Open https://github.com/HAYMOHSEN/Rasmora-Studio
+3. Use Add file > Upload files at the repository root.
+4. Upload index.html and sw.js from this ZIP, replacing those two existing files.
+5. Commit the changes to the main branch. This updates your published app after
+   the GitHub Pages deployment completes.
+6. Close all Rasmora Studio tabs and any installed app window. Reopen the site,
+   let its offline update finish, then close and reopen once more if you still
+   see the old New confirmation. Save any current artwork before reloading.
+7. Click New and accept the confirmation. It should show pure-white paper
+   with an empty Layer 1, without the demo photograph.
+
+OPTIONAL SOURCE DOCUMENTATION
+README.md explains the updated behavior.
+tests/new-document.test.cjs adds regression checks; keep its tests/ path if
+you upload it. Neither is needed to run the fixed app.
+
+VALIDATION
+29 targeted automated checks passed (the creative suite plus three new checks).
+Five focused Chromium checks passed, including the original deployed HTML
+reproduction, opening demo, white canvas pixels, delayed photo and undo, and
+no browser JavaScript errors. Browser checks ran locally against the repository
+assets; the deployed HTML was retrieved over HTTPS.
+
+REPOSITORY BASE
+Prepared from main commit 1bc2ca483d96c5561c5cd97b4005453f97a6b905.
+Do not overwrite newer edits to these files without comparing them first.
+The offline cache version advances from v9 to v11.
+The connected GitHub integration refused write access (HTTP 403), so no pull
+request was opened and these changes have not been published to your website.

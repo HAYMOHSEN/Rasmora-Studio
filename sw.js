@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rasmora-studio-v9';
+const CACHE_NAME = 'rasmora-studio-v11';
 const ASSETS = ['./', './index.html', './creative-studio.js', './creative-studio.css', './extended-studio.js', './extended-studio.css', './studio3d.bundle.js', './assets/xatlas-web.wasm', './manifest.webmanifest', './sw.js', './assets/icon.svg', './assets/icon-192.png', './assets/icon-512.png', './assets/icon-maskable-512.png', './assets/aurelia-editorial-sample.png'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME && (key.startsWith('rasmora-studio-') || key.startsWith('artproof-studio-'))).map(key => caches.delete(key)))).then(() => self.clients.claim())));

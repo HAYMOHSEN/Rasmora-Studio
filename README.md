@@ -72,6 +72,8 @@ AI can change faces, lettering and other details. Background removal is generati
 
 ## Professional starter canvas
 
+Choose **New** to start a blank, pure-white 1200 × 900 canvas with an empty, selected **Layer 1** above a locked white background. New projects do not contain a sample-photo layer. The confirmation reminds you to save your current project first; cancelling keeps it open. A slow-loading demo image cannot replace the new artwork or reset its undo history.
+
 The app opens with **Aurelia · Editorial sample**, an original high-end studio photograph on its own editable layer. A blank paint layer sits above it, so artists can immediately test brushes, masks, selections, typography, and retouching. Hide or delete the sample layer whenever a blank canvas is preferred.
 
 ## Included working capabilities
