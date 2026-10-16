@@ -2,6 +2,14 @@
 
 An offline-capable Progressive Web App for painting, illustration, retouching, editable vector artwork, frame animation, and delivery preparation. This is an installable browser app, not a signed native Windows executable.
 
+## Version 5.0 additions
+
+Open **3D Studio** in the top bar for mesh sculpting, UV unwrapping, layered texture painting, PBR materials, studio lighting, progressive path tracing, a basic bone rig and GLB/OBJ exchange. Save these scenes separately as **.artproof3d.json**. The 3D scene limit is 200,000 triangles; WebGL 2 and compatible graphics hardware are required.
+
+The canvas toolbar now supports free view rotation, Fit and Ctrl+wheel zoom. **Team** connects to the optional private revision-sync and feedback service. Run **Start_Team_Server.cmd** separately and follow **TEAM_SETUP.txt**. No public service has been deployed. See **RELEASE_NOTES_5.txt** for the complete feature scope, hardware dependencies and limits.
+
+The 3D runtime and UV engine are bundled for offline use. End users do not need npm install. Developers can rebuild with npm install followed by npm run build. Third-party notices are in licenses/.
+
 ## Start this version
 
 1. Extract the ZIP to a folder.
@@ -84,7 +92,7 @@ The app opens with **Aurelia · Editorial sample**, an original high-end studio 
 - Warp uses a continuous tessellated grid with bilinear pixel sampling, not a 3D or physically simulated deformation system. A reduced-resolution preview is used during grid dragging; releasing the pointer or applying renders at full document resolution.
 - Natural-media tools are physically inspired procedural brush approximations, not a fluid solver, spectral pigment model, or true impasto simulation.
 - Arabic/English shaping uses browser and installed-font support. For reliable cross-computer typography, install the same fonts and proof the resulting SVG/PDF.
-- Automated DOM/canvas and mocked-provider tests cover the new workflows. Full browser layout, real video encoding, accessibility, performance, Windows pen/palm rejection and live provider-output testing remain required before Store release. No native Windows/Store certification is claimed.
+- Automated DOM/canvas and mocked-provider tests cover the new workflows. Browser workflows and real WebM encoding were exercised in Chromium. Accessibility, sustained performance, Windows pen/palm rejection and live provider-output testing remain required before Store release. No native Windows/Store certification is claimed.
 
 ## Selection and transform workflow
 
@@ -104,7 +112,7 @@ The app has no CDN or browser runtime dependencies. The optional bridge uses Nod
     npm install
     npm test
 
-Validation for this delivery: **51 automated checks passed** (18 selection/transform regressions, 25 creative-workflow DOM/canvas checks, and 8 localhost bridge checks with mocked provider responses). JavaScript syntax and ZIP integrity were also checked. These checks do not substitute for the real-browser/device tests noted above.
+Validation for this delivery: **55 automated checks passed**, covering the existing creative tools, AI bridge guards and Team revision/conflict handling. Actual-browser checks covered 3D sculpt undo/redo, UV generation, texture painting, editable scene round-trips, weighted rig animation, GLB export, progressive path tracing, WebM download and two-client Team sync/feedback. Windows device and production-service validation remain separate. The Store kit includes the detailed logs.
 
 ## Run locally
 

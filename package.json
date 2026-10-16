@@ -1,12 +1,24 @@
 {
   "name": "artproof-studio",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "private": true,
-  "description": "Offline-first illustration, vector and frame-animation PWA with an optional local AI bridge",
+  "description": "Offline-capable painting, illustration, animation and 3D PWA with optional AI and private Team services",
   "scripts": {
     "start": "node ai-bridge.cjs",
-    "test": "node --test tests/selection-transform.test.cjs tests/creative-studio.test.cjs tests/ai-bridge.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "build": "node build-3d.cjs",
+    "team": "node team-server.cjs"
   },
-  "engines": {"node": ">=22"},
-  "devDependencies": {"@napi-rs/canvas": "0.1.100", "linkedom": "0.18.13"}
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.100",
+    "linkedom": "0.18.13",
+    "three": "0.186.1",
+    "three-gpu-pathtracer": "0.0.27",
+    "three-mesh-bvh": "0.9.15",
+    "xatlas-web": "0.1.0",
+    "esbuild": "0.28.2"
+  }
 }
