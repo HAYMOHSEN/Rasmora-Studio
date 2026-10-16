@@ -1,6 +1,10 @@
-# ArtProof Studio v2
+# ArtProof Studio v3
 
 An offline-capable Progressive Web App for painting, illustration, retouching, vector artwork, and delivery preparation.
+
+## Professional starter canvas
+
+The app opens with **Aurelia · Editorial sample**, an original high-end studio photograph on its own editable layer. A blank paint layer sits above it, so artists can immediately test brushes, masks, selections, typography, and retouching. Hide or delete the sample layer whenever a blank canvas is preferred.
 
 ## Included working capabilities
 
