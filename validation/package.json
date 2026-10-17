@@ -1,0 +1,24 @@
+{
+  "name": "rasmora-studio",
+  "version": "5.0.3-rc.1",
+  "private": true,
+  "description": "Offline-capable painting, illustration, animation and 3D PWA with optional AI and private Team services",
+  "scripts": {
+    "start": "node ai-bridge.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "build": "node build-3d.cjs",
+    "team": "node team-server.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.100",
+    "linkedom": "0.18.13",
+    "three": "0.186.1",
+    "three-gpu-pathtracer": "0.0.27",
+    "three-mesh-bvh": "0.9.15",
+    "xatlas-web": "0.1.0",
+    "esbuild": "0.28.2"
+  }
+}
